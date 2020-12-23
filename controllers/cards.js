@@ -11,7 +11,7 @@ module.exports.createCard = (req, res) => {
   Cards.create({ name, link, owner: req.user._id })
     .then((cards) => res.json({ data: cards }))
     .catch((err) => {
-      if (err === 'ValidationError') {
+      if (err.name === 'ValidationError') {
         res.status(400).json({ message: err.message });
       } else res.status(500).json({ message: `Ошибка при чтении файла: ${err}` });
     });
